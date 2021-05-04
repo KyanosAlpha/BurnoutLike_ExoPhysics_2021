@@ -7,7 +7,12 @@ public class Suspension : MonoBehaviour
     }
 
     private void Update() {
-        _transform.position = _collider.center;
+        var position = Vector3.zero;
+        var rotation = Quaternion.identity;
+        _collider.GetWorldPose(out position, out rotation);
+
+        _transform.position = position;
+        _transform.rotation = rotation;
     }
 
     [SerializeField]
