@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4809824365552237335}
   - component: {fileID: 4809824365552237353}
   m_Layer: 0
-  m_Name: collider
+  m_Name: Wheel_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4809824365719225791}
   m_Layer: 0
-  m_Name: Wheel01
+  m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5678520913160938210}
   - component: {fileID: 5176432788888662082}
   m_Layer: 0
-  m_Name: BMW Wheel FL
+  m_Name: Wheel_graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

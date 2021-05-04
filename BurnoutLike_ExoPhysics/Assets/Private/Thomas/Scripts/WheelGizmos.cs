@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WheelGizmos : MonoBehaviour
 {
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         WheelCollider wheel = GetComponent<WheelCollider>();
         Gizmos.color = Color.red;
         var pos = Vector3.zero;
