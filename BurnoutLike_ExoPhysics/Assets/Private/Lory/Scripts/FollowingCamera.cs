@@ -38,12 +38,12 @@ public class FollowingCamera : MonoBehaviour
 
     private void Update()
     {
-        Following();
+        
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        
+        Following();
     }
     #endregion unity messages
 
