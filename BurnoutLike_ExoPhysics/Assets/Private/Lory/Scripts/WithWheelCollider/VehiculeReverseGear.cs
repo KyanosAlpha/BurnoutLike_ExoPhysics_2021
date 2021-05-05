@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VehiculeAcceleration : MonoBehaviour
+public class VehiculeReverseGear : MonoBehaviour
 {
     #region properties
 
@@ -11,12 +11,14 @@ public class VehiculeAcceleration : MonoBehaviour
     #region fields
     [SerializeField]
     private WheelCollider[] _wheelBack;
+    [SerializeField]
+    private Rigidbody _rigidbodyTutur;
 
     [SerializeField]
     private float _speed;
     [SerializeField]
     private float _deceleration;
-    private float _inputAccelerator;
+    private float _inputBrake;
     #endregion fields
 
 
@@ -28,11 +30,6 @@ public class VehiculeAcceleration : MonoBehaviour
 
 
     #region unity messages
-    private void OnGUI()
-    {
-        GUILayout.Button($"InputAccelerator: {_inputAccelerator: 00.00}");
-    }
-
     private void Awake()
     {
         
@@ -45,36 +42,31 @@ public class VehiculeAcceleration : MonoBehaviour
 
     private void Update()
     {
-        GetInputAcceleration();
+        GetInputBrake();
     }
 
     private void FixedUpdate()
     {
-        VehiculeAccelerator();
+        VehiculeBrake();
     }
     #endregion unity messages
 
 
 
     #region private methods
-    private void GetInputAcceleration()
+    private void GetInputBrake()
     {
-        _inputAccelerator = Input.GetAxis("Vertical") * _speed;
+        _inputBrake = Input.GetAxis("Vertical") * _speed;
     }
-
-    private void VehiculeAccelerator()
+    private void VehiculeBrake()
     {
         for (int i = 0; i < _wheelBack.Length; i++)
         {
             var wheelMotor = _wheelBack[i];
 
-            wheelMotor.motorTorque = Mathf.Max(_inputAccelerator, 0);
-
-            if (_inputAccelerator <= 0 && wheelMotor.motorTorque > 0)
-            {
-                wheelMotor.motorTorque = Mathf.Max(0f, wheelMotor.motorTorque - _deceleration);
-            }
+            wheelMotor.motorTorque = Mathf.Min(_inputBrake, 0);
         }
     }
+
     #endregion private methods
 }

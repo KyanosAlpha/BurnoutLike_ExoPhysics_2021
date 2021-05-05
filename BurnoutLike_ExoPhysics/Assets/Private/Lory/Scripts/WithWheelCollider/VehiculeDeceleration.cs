@@ -12,8 +12,6 @@ public class VehiculeDeceleration : MonoBehaviour
     [SerializeField]
     private WheelCollider[] _wheelBack;
     private Rigidbody _rigidbodyTutur;
-
-    private float _inputBrake;
     #endregion fields
 
 
@@ -27,10 +25,9 @@ public class VehiculeDeceleration : MonoBehaviour
     #region unity messages
     private void OnGUI()
     {
-        //GUILayout.Button($"Velocity: {_rigidbodyTutur.velocity.magnitude: 00.00}");
-        //GUILayout.Button($"Motor: {_wheelBack[0].motorTorque: 00.00}");
-        //GUILayout.Button($"Brake: {_wheelBack[0].brakeTorque: 00.00}");
-        //GUILayout.Button($"InputBrake: {_inputBrake: 00.00}");
+        GUILayout.Button($"Velocity: {_rigidbodyTutur.velocity.magnitude: 00.00}");
+        GUILayout.Button($"Motor: {_wheelBack[0].motorTorque: 00.00}");
+        GUILayout.Button($"Brake: {_wheelBack[0].brakeTorque: 00.00}");
     }
 
     private void Awake()
@@ -45,8 +42,7 @@ public class VehiculeDeceleration : MonoBehaviour
 
     private void Update()
     {
-        _inputBrake = Mathf.Min(0f, Input.GetAxis("Vertical"));
-        _inputBrake = Mathf.Abs(_inputBrake);
+       
     }
 
     private void FixedUpdate()
@@ -67,9 +63,13 @@ public class VehiculeDeceleration : MonoBehaviour
     {
         for(int i = 0; i < _wheelBack.Length; i++)
         {
-            if ( _inputBrake >= 0)
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                _wheelBack[i].brakeTorque = _inputBrake * 1000f;
+                _wheelBack[i].brakeTorque = 1500f;
+            }
+            else
+            {
+                _wheelBack[i].brakeTorque = 0f;
             }
         }
     }
