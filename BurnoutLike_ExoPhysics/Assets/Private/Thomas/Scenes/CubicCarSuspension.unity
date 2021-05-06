@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &302731433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &412073018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -324,6 +324,8 @@ GameObject:
   - component: {fileID: 499250767}
   - component: {fileID: 499250766}
   - component: {fileID: 499250768}
+  - component: {fileID: 499250769}
+  - component: {fileID: 499250770}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -341,7 +343,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1500
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -355,7 +357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499250765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.428345, y: 2.37, z: 149.63947}
+  m_LocalPosition: {x: -20.428345, y: 3.03, z: 149.63947}
   m_LocalScale: {x: 2, y: 1, z: 3.5}
   m_Children:
   - {fileID: 1220525778}
@@ -373,14 +375,43 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499250765}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbf78d058ae29b74d80f8d0d645760de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sense: 0.358
+  sense: 1
   factor: 10
   rb: {fileID: 499250766}
+--- !u!114 &499250769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499250765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89228bc3689bfb848b5822a68e91f988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _acceleration: 0.3
+  _brakeIntensity: 1
+  _rotationSpeed: 3000
+--- !u!114 &499250770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499250765}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb20495a23bb49f42ad513fd19e5d8b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _centerOffset: {x: 0, y: 0, z: 1}
+  _radius: 0.18
 --- !u!1 &548181214
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 548181215}
   - component: {fileID: 548181216}
+  - component: {fileID: 548181217}
   m_Layer: 0
   m_Name: Suspension_FL
   m_TagString: Untagged
@@ -406,7 +438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548181214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -0.5, z: 0.49999997}
+  m_LocalPosition: {x: -0.5, y: -0.18999916, z: 0.49999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 499250767}
@@ -424,14 +456,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.8
-  _springCompressionCapacity: 0.5
+  _springLength: 1.2
+  _springCompressionCapacity: 1
   _springStiffness: 30000
-  _damperStiffness: 250
+  _damperStiffness: 3000
   _wheelRadius: 0.5
   _debug: 1
   _restfulColor: {r: 0, g: 0.8245814, b: 1, a: 1}
   _compressedColor: {r: 0.96469927, g: 0, b: 1, a: 1}
+--- !u!114 &548181217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548181214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minimalGrip: 1
+  _additionnalGrip: 1
 --- !u!1 &641302281
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &641302282
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -545,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &651464434
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -640,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &956070957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -735,7 +781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1051929865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -822,6 +868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1111905382}
   - component: {fileID: 1111905383}
+  - component: {fileID: 1111905384}
   m_Layer: 0
   m_Name: Suspension_BL
   m_TagString: Untagged
@@ -837,7 +884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111905381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -0.5, z: -0.49999997}
+  m_LocalPosition: {x: -0.5, y: -0.18999916, z: -0.49999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 499250767}
@@ -855,14 +902,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.8
-  _springCompressionCapacity: 0.5
+  _springLength: 1.2
+  _springCompressionCapacity: 1
   _springStiffness: 30000
-  _damperStiffness: 250
+  _damperStiffness: 3000
   _wheelRadius: 0.5
   _debug: 1
   _restfulColor: {r: 0, g: 0.8245814, b: 1, a: 1}
   _compressedColor: {r: 0.96469927, g: 0, b: 1, a: 1}
+--- !u!114 &1111905384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111905381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minimalGrip: 1
+  _additionnalGrip: 1
 --- !u!1 &1220525777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1392589134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1146,6 +1207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462166943}
   - component: {fileID: 1462166944}
+  - component: {fileID: 1462166945}
   m_Layer: 0
   m_Name: Suspension_BR
   m_TagString: Untagged
@@ -1161,7 +1223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462166942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.5, z: -0.49999997}
+  m_LocalPosition: {x: 0.5, y: -0.18999916, z: -0.49999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 499250767}
@@ -1179,14 +1241,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.8
-  _springCompressionCapacity: 0.5
+  _springLength: 1.2
+  _springCompressionCapacity: 1
   _springStiffness: 30000
-  _damperStiffness: 250
+  _damperStiffness: 3000
   _wheelRadius: 0.5
   _debug: 1
   _restfulColor: {r: 0, g: 0.8245814, b: 1, a: 1}
   _compressedColor: {r: 0.96469927, g: 0, b: 1, a: 1}
+--- !u!114 &1462166945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462166942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minimalGrip: 1
+  _additionnalGrip: 1
 --- !u!1 &1800943427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,7 +1281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1800943428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1295,7 +1371,7 @@ GameObject:
   - component: {fileID: 1986843523}
   - component: {fileID: 1986843522}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1377,6 +1453,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2020092369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2020092373}
+  - component: {fileID: 2020092372}
+  - component: {fileID: 2020092371}
+  - component: {fileID: 2020092370}
+  m_Layer: 0
+  m_Name: Cube (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!65 &2020092370
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020092369}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &2020092371
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020092369}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &2020092372
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020092369}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &2020092373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020092369}
+  m_LocalRotation: {x: -0.17072974, y: -0, z: -0, w: 0.9853179}
+  m_LocalPosition: {x: -21.49, y: -0.19, z: 185.49}
+  m_LocalScale: {x: 45.596, y: 1, z: 28.407}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: -19.661, y: 0, z: 0}
 --- !u!1 &2091208339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,6 +1558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091208340}
   - component: {fileID: 2091208341}
+  - component: {fileID: 2091208342}
   m_Layer: 0
   m_Name: Suspension_FR
   m_TagString: Untagged
@@ -1402,7 +1574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091208339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.5, z: 0.49999997}
+  m_LocalPosition: {x: 0.5, y: -0.19, z: 0.49999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 499250767}
@@ -1420,14 +1592,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.8
-  _springCompressionCapacity: 0.5
+  _springLength: 1.2
+  _springCompressionCapacity: 1
   _springStiffness: 30000
-  _damperStiffness: 250
+  _damperStiffness: 3000
   _wheelRadius: 0.5
   _debug: 1
   _restfulColor: {r: 0, g: 0.8245814, b: 1, a: 1}
   _compressedColor: {r: 0.96469927, g: 0, b: 1, a: 1}
+--- !u!114 &2091208342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091208339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minimalGrip: 1
+  _additionnalGrip: 1
 --- !u!1 &2125421587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2127571433
 BoxCollider:
   m_ObjectHideFlags: 0

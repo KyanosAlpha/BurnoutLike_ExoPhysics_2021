@@ -1,21 +1,24 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class CarSuspension : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private Transform _transform;
     private RaycastHit _currentHit;
-    private float _currentSpringLength = 0;
+    private float _currentSpringLength;
     private float _previousSpringLength;
+    private bool _grounded;
+    public bool Grounded => _grounded;
 
     [Header("Spring")]
     [SerializeField, Min(0), Tooltip("Length of the suspension")]
     private float _springLength;
-    //current springLength = _springlenth * (1 - _compression)
     private float _springMaxExtend;
     private float _springMinExtend;
-    [SerializeField, Min(0), Tooltip("Amount of compression / extension the spring may accept")]
+    [SerializeField, Min(0.5f), Tooltip("Amount of compression / extension the spring may accept")]
     private float _springCompressionCapacity;
     [SerializeField, Min(0)]
     private float _springStiffness;
@@ -25,18 +28,17 @@ public class CarSuspension : MonoBehaviour
     [Header("Wheel")]
     [SerializeField, Min(0)]
     private float _wheelRadius;
-    [Space]
 
     [Header("Gizmos")]
     [SerializeField]
     private bool _debug;
     [SerializeField]
+    private bool _labels;
+    [SerializeField]
     private Color _restfulColor = Color.green;
     [SerializeField]
     private Color _compressedColor = Color.red;
     private float _debugLength;
-    private bool _grounded;
-    public bool Grounded => _grounded;
 
 #if UNITY_EDITOR
     private void OnDrawGizmos() 
@@ -69,6 +71,8 @@ public class CarSuspension : MonoBehaviour
             _debugLength = 0;
         }
 
+        if(!_labels) return;
+        
         Handles.color = Color.grey;
         Handles.Label(t.position, $"( {compression : #0.00} )");
     }

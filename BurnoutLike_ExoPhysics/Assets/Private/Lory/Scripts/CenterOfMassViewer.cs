@@ -4,6 +4,8 @@ public class CenterOfMassViewer : MonoBehaviour
 {
     #region fields
     [SerializeField]
+    private bool _debug;
+    [SerializeField]
     private Vector3 _centerOffset;
     private Rigidbody _carRigidbody;
 
@@ -14,6 +16,8 @@ public class CenterOfMassViewer : MonoBehaviour
     #region unity messages
     private void OnDrawGizmos()
     {
+        if(!_debug) return;
+        
         var rb = GetComponent<Rigidbody>();
         var t = transform;
         Gizmos.color = Color.green;
