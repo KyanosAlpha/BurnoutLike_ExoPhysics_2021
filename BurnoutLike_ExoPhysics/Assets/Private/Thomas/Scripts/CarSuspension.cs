@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class CarSuspension : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
+    private CarController _controller;
     private Transform _transform;
     private RaycastHit _currentHit;
     private float _currentSpringLength;
@@ -81,7 +81,7 @@ public class CarSuspension : MonoBehaviour
     private void Awake() 
     {
         _transform = transform;
-        _rigidbody = _transform.root.GetComponent<Rigidbody>();
+        _controller = _transform.root.GetComponent<CarController>();
         _springMaxExtend = _springLength + _springCompressionCapacity;
         _springMinExtend = _springLength - _springCompressionCapacity;
     }
@@ -100,7 +100,12 @@ public class CarSuspension : MonoBehaviour
             _currentSpringLength = hit.distance - _wheelRadius;
             _currentSpringLength = Mathf.Clamp(_currentSpringLength, _springMinExtend, _springMaxExtend);
             _currentHit = hit;
+            _grounded = true;
             ApplyCompensation();
+        }
+
+        else{
+            _grounded = false;
         }
     }
 
@@ -110,6 +115,6 @@ public class CarSuspension : MonoBehaviour
         var springForceIntensity = _springStiffness * (_springLength - _currentSpringLength);
         var damperForceIntensity = _damperStiffness * springVelocity;
         var suspensionForce = (springForceIntensity + damperForceIntensity) * _transform.up;
-        _rigidbody.AddForceAtPosition(suspensionForce, _currentHit.point);
+        _controller.CarRigidbody.AddForceAtPosition(suspensionForce, _currentHit.point);
     }
 }
