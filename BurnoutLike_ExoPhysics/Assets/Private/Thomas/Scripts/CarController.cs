@@ -7,8 +7,14 @@ public class CarController : MonoBehaviour
     #region inspector
     [SerializeField, Range(0, 180)]
     private float _maxWheelRotation;  
+    [SerializeField, Min(1)]
+    private float _maxSpeed;
     [SerializeField, Min(0)]
     private float _minVelocityTreshold;
+    [SerializeField, Min(0)]
+    private float _groundedAngularDrag;
+    [SerializeField, Min(0)]
+    private float _inAirAngularDrag;
     [SerializeField]
     private CarSuspension[] _drivingWheel;      
     #endregion
@@ -27,6 +33,7 @@ public class CarController : MonoBehaviour
     public bool Grounded => _grounded;
     public float MaxWheelRotation => _maxWheelRotation;
     public float SignedVelocity => _signedVelocity;
+    public float MaxSpeed => _maxSpeed;
     #endregion
 
 
@@ -64,11 +71,13 @@ public class CarController : MonoBehaviour
         for(int i = 0; i < _drivingWheel.Length; i++){
             if(_drivingWheel[i].Grounded){
                 _grounded = true;
+                _rigidbody.angularDrag = _groundedAngularDrag;
                 return;
             }
 
             else if(i == _drivingWheel.Length - 1){
                 _grounded = false;
+                _rigidbody.angularDrag = _inAirAngularDrag;
             }
         }
     }

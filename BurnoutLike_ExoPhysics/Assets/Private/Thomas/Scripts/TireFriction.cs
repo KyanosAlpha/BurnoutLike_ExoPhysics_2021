@@ -5,8 +5,7 @@ using UnityEngine;
 public class TireFriction : MonoBehaviour
 {
     #region private fields
-    private Transform _transform;       
-    private Rigidbody _rigidbody;
+    private CarController _controller;
     [Header("Forward friction")]
     [SerializeField]
     private float _minimalForwardGrip;
@@ -24,55 +23,48 @@ public class TireFriction : MonoBehaviour
     #region unity api
     private void Awake() 
     {
-        _rigidbody = transform.root.GetComponent<Rigidbody>();
-        _transform = transform;
+        _controller = transform.root.GetComponent<CarController>();
+        if(_controller == null)
+        {
+            Debug.LogError("No CarController found on the root of this gameObject", this);
+        }
     }
 
     private void FixedUpdate() 
     {
-        var velocity = _rigidbody.velocity;
-        var tmpVelocity = new Vector3(velocity.x, 0, velocity.z);
-        var angularity = tmpVelocity.sqrMagnitude > 0 ? Vector3.Dot(_transform.right, tmpVelocity.normalized) : 0f;
+        ApplyTireFriction();
+    }
+
+    private void ApplyTireFriction()
+    {
+        if(!_controller.Grounded) return;
+
+        var velocity = _controller.CarRigidbody.velocity;
+        var angularity = Vector3.Dot(_controller.CarTransform.right, velocity.normalized);
         angularity = Mathf.Abs(angularity);
 
-        var velocityX = CalculateFriction(velocity.x, 1, _minimalForwardGrip, _additionalForwardGrip);
-        var velocityZ = CalculateFriction(velocity.z, 1, _minimalSidewayGrip, _additionalSidewayGrip);
+        var velocityX = CalculateFriction(velocity.x, angularity, _minimalForwardGrip, _additionalForwardGrip);
+        //var velocityY = CalculateFriction(velocity.y, angularity, _minimalForwardGrip, _additionalForwardGrip);
+        var velocityZ = CalculateFriction(velocity.z, angularity, _minimalSidewayGrip, _additionalSidewayGrip);
         var newVelocity = new Vector3(velocityX, velocity.y, velocityZ);
 
-        _rigidbody.velocity = newVelocity;
-    }       
-
-    /* private void OnGUI() {
-        var velocity = transform.root.GetComponent<Rigidbody>().velocity;
-        var angularity = Vector3.Dot(_transform.right, _rigidbody.velocity.normalized);
-        angularity = Mathf.Abs(angularity);
-
-        var velocityX = CalculateFriction(velocity.x, angularity);
-        var velocityZ = CalculateFriction(velocity.z, angularity);
-
-        GUILayout.Button($"angularity : {angularity : 0.00}");
-        GUILayout.Button($"velocity : {velocity : 0.00}");
-        GUILayout.Button($"x : {velocityX : 0.00}");
-        GUILayout.Button($"z : {velocityZ : 0.00}");
-    } */
+        _controller.CarRigidbody.velocity = newVelocity;
+    }
     #endregion
 
-    
+
 
     #region private method
     private float CalculateFriction(float axleVelocity, float angularity, float minimalGrip, float additionalGrip)
     {
-        var normalizedAxle = axleVelocity > 0 ? 1f : axleVelocity < 0 ? -1f : 0;
+        var normalizedAxle = axleVelocity > 0 ? 1f : -1f; //axleVelocity < 0 ? -1f : 0;
         var friction = normalizedAxle * (additionalGrip * angularity + minimalGrip);
         friction *= Time.fixedDeltaTime;
         axleVelocity -= friction;
 
-        if(axleVelocity * normalizedAxle <= 0)
-        {
-            axleVelocity = 0;
-        }
-
-        return axleVelocity;
+        if(axleVelocity * normalizedAxle > 0) return axleVelocity;
+        
+        return 0;
     }        
     #endregion
 }
