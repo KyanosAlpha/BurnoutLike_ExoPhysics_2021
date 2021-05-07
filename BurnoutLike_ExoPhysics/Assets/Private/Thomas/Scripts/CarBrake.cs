@@ -63,14 +63,12 @@ public class CarBrake : MonoBehaviour
         var deltaZ = ApplyBrake(velocity.z, brake.z);
 
         Vector3 newVelocity = new Vector3(deltaX, deltaY, deltaZ);
-        Debug.Log(newVelocity);
         _controller.CarRigidbody.velocity = newVelocity;
     }
 
     public float ApplyBrake(float velocity, float brake){
         var delta = velocity - brake;
         if (delta * velocity > 0) return delta;
-        Debug.Log(0);
         
         return 0;
     }
