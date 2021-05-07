@@ -16,11 +16,14 @@ public class GameManager : MonoBehaviour
     private RectTransform _defaultUI;
     [SerializeField]
     private float _challengeTimer;
+    [SerializeField]
+    private Transform _spawnPoint;
 
     public int MaxCheckPoint => _checkpoints.Length;
     public int ValidatedCheckPoints => _validatedCheckpoints;
     public float TimerTime => Mathf.Max(0, _endTime - Time.time);
 
+    private Transform _player;
     private float _endTime = 0;
     private IEnumerator _coroutine;
     private int _validatedCheckpoints = 0;
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
     private GameState _state;
 
     private void Awake() {
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
         _state = GameState.Default;
         _challengeUI.gameObject.SetActive(false);
         _defaultUI.gameObject.SetActive(true);
@@ -41,6 +45,7 @@ public class GameManager : MonoBehaviour
 
         foreach(var point in _checkpoints){
             point.CheckEvent += ValidateCheckpoint;
+            point.gameObject.SetActive(false);
         }
     }
 
@@ -72,20 +77,22 @@ public class GameManager : MonoBehaviour
         _state = GameState.InChallenge;
         SwitchUI();
         SetActiveCheckPoints(true);
-        OnChallengeState.Invoke();
-        StartCoroutine(_coroutine);
+        _player.position = _spawnPoint.position;
+        _player.rotation = _spawnPoint.rotation;
+        OnChallengeState?.Invoke();
+        StartCoroutine(ChallengeCountDown());
     }
 
     private void StopChallenge(){
         _state = GameState.Default;
         SwitchUI();
         SetActiveCheckPoints(false);
-        OnDefaultState.Invoke();
+        OnDefaultState?.Invoke();
         _validatedCheckpoints = 0;
     }
 
     private void AbortChallenge(){
-        StopCoroutine(_coroutine);
+        StopAllCoroutines();
         StopChallenge();
     }
 

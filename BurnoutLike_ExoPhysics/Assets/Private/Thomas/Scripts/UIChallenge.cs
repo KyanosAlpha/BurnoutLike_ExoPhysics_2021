@@ -28,6 +28,6 @@ public class UIChallenge : MonoBehaviour
         var time = _manager.TimerTime;
         var minutes = Mathf.RoundToInt(time / 60);
         var seconds = (time - minutes) % 60;
-        _timer.text = $"{minutes :00} : {seconds :00}";
+        _timer.text = $"{minutes :#00} : {seconds :#00.00}";
     }
 }
