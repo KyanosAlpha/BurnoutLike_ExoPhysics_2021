@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -6,6 +7,8 @@ public class CarController : MonoBehaviour
     #region inspector
     [SerializeField, Range(0, 180)]
     private float _maxWheelRotation;  
+    [SerializeField, Min(0)]
+    private float _minVelocityTreshold;
     [SerializeField]
     private CarSuspension[] _drivingWheel;      
     #endregion
@@ -39,6 +42,15 @@ public class CarController : MonoBehaviour
     {
         CheckGround();
         UpdateSignedVelocity();
+        ClampVelocity();
+    }
+
+    private void ClampVelocity()
+    {
+        var velocity = _rigidbody.velocity;
+        if(velocity.magnitude < _minVelocityTreshold){
+            _rigidbody.velocity = new Vector3(0, velocity.y, 0);
+        }
     }
     #endregion
 
