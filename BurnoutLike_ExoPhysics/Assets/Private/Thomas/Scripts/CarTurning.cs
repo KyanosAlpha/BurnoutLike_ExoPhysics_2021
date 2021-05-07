@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CarTurning : MonoBehaviour
@@ -13,6 +12,10 @@ public class CarTurning : MonoBehaviour
     private void Awake() 
     {
         _controller = transform.root.GetComponent<CarController>();
+        if(_controller == null)
+        {
+            Debug.LogError("No CarController found on the root of this gameObject", this);
+        }
     }
 
     private void Update() 
@@ -27,7 +30,7 @@ public class CarTurning : MonoBehaviour
 
     private void RotateCar()
     {
-        var wheelRotation = (_controller.WheelOrientation.y) * Time.deltaTime;
+        var wheelRotation = _controller.WheelOrientation.y * Time.fixedDeltaTime;
         _controller.CarRigidbody.rotation *= Quaternion.Euler(Vector3.up * wheelRotation);
     }
 

@@ -18,7 +18,7 @@ public class CarSuspension : MonoBehaviour
     private float _springLength;
     private float _springMaxExtend;
     private float _springMinExtend;
-    [SerializeField, Min(0.5f), Tooltip("Amount of compression / extension the spring may accept")]
+    [SerializeField, Min(0), Tooltip("Amount of compression / extension the spring may accept")]
     private float _springCompressionCapacity;
     [SerializeField, Min(0)]
     private float _springStiffness;
@@ -48,6 +48,7 @@ public class CarSuspension : MonoBehaviour
         var t = transform;
         RaycastHit hit;
         var compression = 1 - (_debugLength / _springLength);
+        var minSpringLength = _springLength - _springCompressionCapacity;
         Color c = Color.Lerp(_restfulColor, _compressedColor, compression);
         Gizmos.color = c;
         Handles.color = c;
@@ -56,6 +57,7 @@ public class CarSuspension : MonoBehaviour
             var springEnd = hit.point + t.up * _wheelRadius;
             Gizmos.DrawLine(t.position, springEnd);
             Gizmos.DrawSphere(springEnd, 0.05f);
+            Gizmos.DrawSphere(t.position - t.up * minSpringLength, 0.025f);
             Handles.DrawWireDisc(springEnd, t.right, _wheelRadius);
             _debugLength = hit.distance - _wheelRadius;
         }
@@ -67,6 +69,7 @@ public class CarSuspension : MonoBehaviour
             var springEnd = t.position - t.up * _springLength;
             Gizmos.DrawLine(t.position, springEnd);
             Gizmos.DrawSphere(springEnd, 0.05f);
+            Gizmos.DrawSphere(t.position - t.up * minSpringLength, 0.025f);
             Handles.DrawWireDisc(springEnd, t.right, _wheelRadius);
             _debugLength = 0;
         }
@@ -82,8 +85,15 @@ public class CarSuspension : MonoBehaviour
     {
         _transform = transform;
         _controller = _transform.root.GetComponent<CarController>();
-        _springMaxExtend = _springLength + _springCompressionCapacity;
+        if(_controller == null)
+        {
+            Debug.LogError("No CarController found on the root of this gameObject", this);
+        }
+        
         _springMinExtend = _springLength - _springCompressionCapacity;
+        _springMaxExtend = _springLength + _springCompressionCapacity;
+        _previousSpringLength = _springLength;
+        _currentSpringLength = _springLength;
     }
 
     private void FixedUpdate() 
@@ -94,7 +104,7 @@ public class CarSuspension : MonoBehaviour
     private void UpdateSuspension()
     {   
         RaycastHit hit;
-        if(Physics.Raycast(_transform.position, -_transform.up, out hit, _springMaxExtend + _wheelRadius))
+        if(Physics.Raycast(_transform.position, -_transform.up, out hit, _springLength + _wheelRadius))
         {
             _previousSpringLength = _currentSpringLength;
             _currentSpringLength = hit.distance - _wheelRadius;

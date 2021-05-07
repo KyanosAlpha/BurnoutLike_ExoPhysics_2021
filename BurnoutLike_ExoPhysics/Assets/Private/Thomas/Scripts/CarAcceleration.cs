@@ -7,7 +7,7 @@ public class CarAcceleration : MonoBehaviour
     [SerializeField]
     private float _acceleration;
     [SerializeField]
-    private bool _debug;
+    private bool _debugApplyedAccelerationOrientation;
 
     private void Awake() {
         _controller = transform.root.GetComponent<CarController>();
@@ -25,15 +25,17 @@ public class CarAcceleration : MonoBehaviour
         Accelerate();
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos() 
     {
-        if(_controller == null || !_debug) return;
+        if(_controller == null || !_debugApplyedAccelerationOrientation) return;
 
         var wheelForward = Quaternion.Euler(Vector3.up * _controller.WheelOrientation.y) * _controller.CarTransform.forward;
         var velocityToAdd = wheelForward * _input * _acceleration * Time.fixedDeltaTime;
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.position + velocityToAdd);
     }
+#endif
 
     private void Accelerate()
     {
