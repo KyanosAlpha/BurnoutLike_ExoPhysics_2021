@@ -653,6 +653,7 @@ GameObject:
   - component: {fileID: 4518892611232714}
   - component: {fileID: 33890193094706242}
   - component: {fileID: 23416722217701188}
+  - component: {fileID: 6985759243863287167}
   m_Layer: 0
   m_Name: Truck
   m_TagString: Untagged
@@ -729,6 +730,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6985759243863287167
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257021105101364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5818973, y: 3.2312093, z: 8.092188}
+  m_Center: {x: -0.00000011920929, y: -0.0000010728836, z: -0.00000023841858}
 --- !u!1 &1258333710186644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,6 +1090,7 @@ GameObject:
   - component: {fileID: 4129728393639716}
   - component: {fileID: 33933712747842778}
   - component: {fileID: 23877302462079082}
+  - component: {fileID: 4377086839425712738}
   m_Layer: 0
   m_Name: Trailer
   m_TagString: Untagged
@@ -1150,6 +1165,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4377086839425712738
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597388731451906}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3786266, y: 3.4370358, z: 10.591483}
+  m_Center: {x: -0.008673072, y: 0.07034564, z: -2.870502}
 --- !u!1 &1628062759368276
 GameObject:
   m_ObjectHideFlags: 0
