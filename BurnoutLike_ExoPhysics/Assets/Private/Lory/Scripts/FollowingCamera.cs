@@ -9,13 +9,14 @@ public class FollowingCamera : MonoBehaviour
 
     #region fields
     [SerializeField]
-    private GameObject _player;
+    private GameObject _vehiculeView;
+    private Vector3 _velocity;
     [SerializeField]
-    private GameObject _cameraConstraint;
-    [SerializeField]
-    private Transform _transformCamera;
-    [SerializeField]
-    private float _speed;
+    private Transform[] _cameraLocation;
+    [SerializeField, Range (0, 20)]
+    private float _smoothTime = 5;
+    private int _locationIndicator = 3;
+    
     #endregion fields
 
 
@@ -28,7 +29,8 @@ public class FollowingCamera : MonoBehaviour
     #region unity messages
     private void Awake()
     {
-        _transformCamera = transform;
+        _cameraLocation = _vehiculeView.GetComponentsInChildren<Transform>();
+        _velocity = Vector3.zero;
     }
 
     private void Start()
@@ -38,22 +40,31 @@ public class FollowingCamera : MonoBehaviour
 
     private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            _locationIndicator = (_locationIndicator == 2) ? 3 : 2;
+        }
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        Following();
+        CameraBehaviour();
     }
     #endregion unity messages
 
 
 
     #region private methods
-    private void Following()
+    private void CameraBehaviour()
     {
-        _transformCamera.position = Vector3.Lerp(_transformCamera.position, _cameraConstraint.transform.position, Time.deltaTime * _speed);
-        _transformCamera.LookAt(_player.transform.position);
+        if(_locationIndicator == 2)
+        {
+            transform.position = _cameraLocation[2].transform.position;
+        }
+
+        var newPosition = Vector3.SmoothDamp(transform.position, _cameraLocation[_locationIndicator].transform.position, ref _velocity, _smoothTime * Time.deltaTime);
+        transform.position = newPosition;
+        transform.LookAt(_cameraLocation[1].transform);
     }
     #endregion private methods
 }

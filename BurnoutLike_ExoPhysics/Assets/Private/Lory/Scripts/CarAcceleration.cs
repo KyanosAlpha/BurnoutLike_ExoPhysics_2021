@@ -9,6 +9,7 @@ public class CarAcceleration : MonoBehaviour
 
     #region fields
     private Rigidbody _carRigidbody;
+    private Transform _carTransform;
 
     [SerializeField]
     private float _carSpeed;
@@ -16,6 +17,9 @@ public class CarAcceleration : MonoBehaviour
     private float _carBrakeIntensity;
     [SerializeField]
     private float _carRotationSpeed;
+    private float _carRotationFactor;
+    [SerializeField]
+    private float _magnitude;
     #endregion fields
 
 
@@ -26,9 +30,17 @@ public class CarAcceleration : MonoBehaviour
 
 
     #region unity messages
+    private void OnGUI()
+    {
+        var rotation = _carRigidbody.rotation.eulerAngles;
+
+        GUILayout.Button($"Value Rotation: {rotation}");
+    }
+
     private void Awake()
     {
         _carRigidbody = GetComponent<Rigidbody>();
+        _carTransform = transform;
     }
 
     private void Start()
@@ -56,17 +68,23 @@ public class CarAcceleration : MonoBehaviour
     {
         if (Input.GetAxis("Vertical") > 0)
         {
-            _carRigidbody.velocity += transform.forward * _carSpeed;
+            _carRigidbody.velocity += _carTransform.forward * _carSpeed * Time.fixedDeltaTime;
         }
         if (Input.GetAxis("Vertical") < 0)
         {
-            _carRigidbody.velocity -= transform.forward * _carSpeed;
+            _carRigidbody.velocity -= _carTransform.forward * _carSpeed * Time.fixedDeltaTime;
         }
     }
 
     private void CarRotation()
     {
-        _carRigidbody.AddTorque(transform.up * (Input.GetAxis("Horizontal") * _carRotationSpeed), ForceMode.Force);
+        if (_carRigidbody.velocity.magnitude < _magnitude) return;
+        SignedVelocity();
+        var rigidbodyRotation = _carRigidbody.rotation.eulerAngles;
+        var newRotation = _carTransform.up * Input.GetAxis("Horizontal") * _carRotationSpeed * _carRotationFactor * Time.fixedDeltaTime;
+
+        rigidbodyRotation += newRotation;
+        _carRigidbody.rotation = Quaternion.Euler(rigidbodyRotation);
     }
 
     private void Carbrake()
@@ -74,7 +92,7 @@ public class CarAcceleration : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift))
         {
             var velocity = _carRigidbody.velocity;
-            var brake = velocity.normalized / _carBrakeIntensity;
+            var brake = velocity.normalized / _carBrakeIntensity * Time.fixedDeltaTime;
 
             var velocityX = velocity.x;
             var velocityY = velocity.y;
@@ -105,6 +123,15 @@ public class CarAcceleration : MonoBehaviour
 
             _carRigidbody.velocity = newVelocity;
         }
+    }
+
+    private void SignedVelocity()
+    {
+        var rigidbodyVelocity = _carRigidbody.velocity;
+        var carForward = _carTransform.forward;
+        var dotProduct = Vector3.Dot(carForward, rigidbodyVelocity);
+
+        _carRotationFactor = dotProduct >= 0.001f ? 1 : -1;
     }
     #endregion private methods
 }

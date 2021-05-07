@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Private/Lory/Scenes/Scene_Lory_Playground.unity
+    guid: 1dd9ee7e5e8d44b469f62905d1b7623a
   m_configObjects: {}

@@ -7,7 +7,6 @@ public class VehiculeFrontLights : MonoBehaviour
     [SerializeField]
     private GameObject[] _lights;
     private bool _isLightOn;
-
     #endregion properties
 
 
