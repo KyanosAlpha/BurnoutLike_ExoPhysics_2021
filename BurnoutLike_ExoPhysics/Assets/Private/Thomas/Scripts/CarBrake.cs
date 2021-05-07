@@ -49,7 +49,7 @@ public class CarBrake : MonoBehaviour
 
 
     #region private methods
-    private void UpdateInput() => _input = Input.GetKey(KeyCode.A);
+    private void UpdateInput() => _input = Input.GetKey(KeyCode.LeftShift);
 
     private void Carbrake()
     {
