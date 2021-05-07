@@ -26,8 +26,8 @@ public class UIChallenge : MonoBehaviour
     private void UpdateTimer()
     {
         var time = _manager.TimerTime;
-        var minutes = Mathf.RoundToInt(time / 60);
-        var seconds = (time - minutes) % 60;
-        _timer.text = $"{minutes :00} : {seconds :00}";
+        var seconds = time % 60;
+        var minutes = (time - seconds) / 60;
+        _timer.text = $"{minutes :#00}:{seconds :#00.00}";
     }
 }
