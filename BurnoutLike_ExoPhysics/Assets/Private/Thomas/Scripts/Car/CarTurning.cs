@@ -32,11 +32,12 @@ public class CarTurning : MonoBehaviour
 
     private void RotateCar()
     {
+        if(!_controller.Grounded) return;
+
         var wheelRotation = _controller.WheelOrientation.y * Time.fixedDeltaTime;
         var velocity =_controller.CarRigidbody.velocity;
         var velocity2D = new Vector3(velocity.x, 0, velocity.z);
-        var velocityRatio = Mathf.Clamp01(velocity2D.magnitude / _controller.MaxSpeed);
-        var turnCapacity = _turningCurve.Evaluate(velocityRatio);
+        var turnCapacity = _turningCurve.Evaluate(velocity2D.magnitude);
         _controller.CarRigidbody.rotation *= Quaternion.Euler(Vector3.up * wheelRotation * turnCapacity);
     }
 

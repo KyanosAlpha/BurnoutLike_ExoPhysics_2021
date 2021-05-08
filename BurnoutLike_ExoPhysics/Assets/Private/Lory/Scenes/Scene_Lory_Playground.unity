@@ -13467,7 +13467,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456715688}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea35f045a7dec04fb006fd217eaa3f1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -18422,7 +18422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ba15f6912b86a45a0f9587b0505aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
 --- !u!114 &653015134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18440,24 +18440,24 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 25.505106
-      outSlope: 25.505106
+      value: 0.0066833496
+      inSlope: 16.07149
+      outSlope: 16.07149
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.058636755
+      outWeight: 0.14796193
     - serializedVersion: 3
-      time: 0.1
+      time: 0.15
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
+      inSlope: -0.0030694648
+      outSlope: -0.0030694648
+      tangentMode: 0
+      weightedMode: 2
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.7120321
     - serializedVersion: 3
-      time: 0.35
+      time: 2
       value: 0.75
       inSlope: 0
       outSlope: 0
@@ -18466,7 +18466,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
+      time: 3
       value: 0.75
       inSlope: 0
       outSlope: 0
@@ -18477,7 +18477,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _wheelSmoothness: 0.4
+  _wheelSmoothness: 0.25
 --- !u!114 &653015135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18505,7 +18505,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxWheelRotation: 60
-  _maxSpeed: 15
   _minVelocityTreshold: 0.05
   _groundedAngularDrag: 5
   _inAirAngularDrag: 0.05
@@ -18524,7 +18523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143fea6bb9a94a043a87c290a4d38e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carBrakeIntensity: 25
+  _carBrakeIntensity: 20
   _debug: 0
 --- !u!114 &653015138
 MonoBehaviour:
@@ -18553,9 +18552,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minimalForwardGrip: 2
-  _additionalForwardGrip: 100
+  _additionalForwardGrip: 35
   _minimalSidewayGrip: 2
-  _additionalSidewayGrip: 100
+  _additionalSidewayGrip: 35
 --- !u!54 &653015141
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20379,7 +20378,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712078861}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea35f045a7dec04fb006fd217eaa3f1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -20392,7 +20391,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712078861}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea35f045a7dec04fb006fd217eaa3f1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -20405,7 +20404,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712078861}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea35f045a7dec04fb006fd217eaa3f1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -25910,7 +25909,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910624914}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea35f045a7dec04fb006fd217eaa3f1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.35
@@ -34539,7 +34538,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1198440246}
   - component: {fileID: 1198440248}
-  - component: {fileID: 1198440247}
   m_Layer: 0
   m_Name: Suspension_BL
   m_TagString: Untagged
@@ -34561,22 +34559,6 @@ Transform:
   m_Father: {fileID: 653015142}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1198440247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198440245}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minimalForwardGrip: 0.5
-  _additionalForwardGrip: 0.5
-  _minimalSidewayGrip: 0
-  _additionalSidewayGrip: 0.1
 --- !u!114 &1198440248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34589,10 +34571,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.4
+  _springLength: 0.49
   _springCompressionCapacity: 0.5
-  _springStiffness: 35000
-  _damperStiffness: 1700
+  _springStiffness: 45000
+  _damperStiffness: 2500
   _wheelRadius: 0.3
   _debug: 1
   _labels: 0
@@ -36962,6 +36944,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1325122484}
   - component: {fileID: 1325122485}
+  - component: {fileID: 1325122486}
+  - component: {fileID: 1325122491}
   m_Layer: 0
   m_Name: Honk
   m_TagString: Untagged
@@ -36994,7 +36978,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -37004,7 +36988,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10.006661
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -37079,6 +37063,43 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1325122486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325122483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfba563ce164356438ea8b86e765ea03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _honkBegin: {fileID: 8300000, guid: a1255cef5c7e3a4468b592dc4702b47e, type: 3}
+  _honkHold: {fileID: 8300000, guid: 031e5f0ede3c8d3498a046dd3ff442d0, type: 3}
+--- !u!164 &1325122491
+AudioReverbFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325122483}
+  m_Enabled: 1
+  m_DryLevel: 0
+  m_Room: -1000
+  m_RoomHF: -800
+  m_DecayTime: 1.49
+  m_DecayHFRatio: 0.67
+  m_ReflectionsLevel: -2273
+  m_ReverbLevel: -1691
+  m_ReverbDelay: 0.011
+  m_Diffusion: 50
+  m_Density: 100
+  m_HFReference: 5000
+  m_RoomLF: 0
+  m_LFReference: 250
+  m_ReflectionsDelay: 0
+  m_ReverbPreset: 17
 --- !u!1001 &1325771269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38189,7 +38210,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1356590281}
   - component: {fileID: 1356590283}
-  - component: {fileID: 1356590282}
   m_Layer: 0
   m_Name: Suspension_FR
   m_TagString: Untagged
@@ -38211,22 +38231,6 @@ Transform:
   m_Father: {fileID: 653015142}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1356590282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356590280}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minimalForwardGrip: 0.5
-  _additionalForwardGrip: 0.5
-  _minimalSidewayGrip: 0
-  _additionalSidewayGrip: 0.1
 --- !u!114 &1356590283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38239,10 +38243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.4
+  _springLength: 0.49
   _springCompressionCapacity: 0.5
-  _springStiffness: 35000
-  _damperStiffness: 2000
+  _springStiffness: 45000
+  _damperStiffness: 2500
   _wheelRadius: 0.3
   _debug: 1
   _labels: 0
@@ -38288,10 +38292,10 @@ Transform:
   - {fileID: 1624096926}
   - {fileID: 624786913}
   - {fileID: 888890423}
+  - {fileID: 1393916471}
   - {fileID: 1572023291}
   - {fileID: 1280962653}
   - {fileID: 2143024571}
-  - {fileID: 1393916471}
   m_Father: {fileID: 1754896542}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -42470,7 +42474,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1487446318}
   - component: {fileID: 1487446320}
-  - component: {fileID: 1487446319}
   m_Layer: 0
   m_Name: Suspension_FL
   m_TagString: Untagged
@@ -42492,22 +42495,6 @@ Transform:
   m_Father: {fileID: 653015142}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1487446319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487446317}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minimalForwardGrip: 0.5
-  _additionalForwardGrip: 0.5
-  _minimalSidewayGrip: 0
-  _additionalSidewayGrip: 0.1
 --- !u!114 &1487446320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42520,10 +42507,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.4
+  _springLength: 0.49
   _springCompressionCapacity: 0.5
-  _springStiffness: 35000
-  _damperStiffness: 2000
+  _springStiffness: 45000
+  _damperStiffness: 2500
   _wheelRadius: 0.3
   _debug: 1
   _labels: 0
@@ -45596,7 +45583,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1635890509}
   - component: {fileID: 1635890511}
-  - component: {fileID: 1635890510}
   m_Layer: 0
   m_Name: Suspension_BR
   m_TagString: Untagged
@@ -45618,22 +45604,6 @@ Transform:
   m_Father: {fileID: 653015142}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1635890510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635890508}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b2391053cf20bb45b4dcdedd465d244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minimalForwardGrip: 0.5
-  _additionalForwardGrip: 0.5
-  _minimalSidewayGrip: 0
-  _additionalSidewayGrip: 0.1
 --- !u!114 &1635890511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45646,10 +45616,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45fb7e2a8d494d4e804ab47d41c7a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _springLength: 0.4
+  _springLength: 0.49
   _springCompressionCapacity: 0.5
-  _springStiffness: 35000
-  _damperStiffness: 1700
+  _springStiffness: 45000
+  _damperStiffness: 2500
   _wheelRadius: 0.3
   _debug: 1
   _labels: 0
