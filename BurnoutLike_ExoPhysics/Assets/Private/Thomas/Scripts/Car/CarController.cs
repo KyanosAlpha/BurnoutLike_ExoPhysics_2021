@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -13,7 +14,9 @@ public class CarController : MonoBehaviour
     [SerializeField, Min(0)]
     private float _inAirAngularDrag;
     [SerializeField]
-    private CarSuspension[] _drivingWheel;      
+    private CarSuspension[] _drivingWheels;      
+    [SerializeField]
+    private CarSuspension[] _turningWheels;      
     #endregion
 
 
@@ -46,6 +49,16 @@ public class CarController : MonoBehaviour
         CheckGround();
         UpdateSignedVelocity();
         ClampVelocity();
+        ApplyWheelAngleToSuspensions();
+    }
+
+    private void ApplyWheelAngleToSuspensions()
+    {
+        for (int i = 0; i < _turningWheels.Length; i++)
+        {
+            var suspension =  _turningWheels[i];
+            suspension.transform.rotation = Quaternion.Euler(_currentWheelEulerianRotation);
+        }
     }
 
     private void ClampVelocity()
@@ -64,14 +77,14 @@ public class CarController : MonoBehaviour
 
     private void CheckGround()
     {
-        for(int i = 0; i < _drivingWheel.Length; i++){
-            if(_drivingWheel[i].Grounded){
+        for(int i = 0; i < _drivingWheels.Length; i++){
+            if(_drivingWheels[i].Grounded){
                 _grounded = true;
                 _rigidbody.angularDrag = _groundedAngularDrag;
                 return;
             }
 
-            else if(i == _drivingWheel.Length - 1){
+            else if(i == _drivingWheels.Length - 1){
                 _grounded = false;
                 _rigidbody.angularDrag = _inAirAngularDrag;
             }

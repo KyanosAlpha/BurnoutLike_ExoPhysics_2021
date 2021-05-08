@@ -8,6 +8,8 @@ public class CarTurning : MonoBehaviour
     private float _input;
     [SerializeField]
     private float _wheelSmoothness;
+    [SerializeField]
+    private float _torqueMultiplier;
     private float _currentRotation;
     private float _interpolationVelocity;
 
@@ -38,7 +40,7 @@ public class CarTurning : MonoBehaviour
         var velocity =_controller.CarRigidbody.velocity;
         var velocity2D = new Vector3(velocity.x, 0, velocity.z);
         var turnCapacity = _turningCurve.Evaluate(velocity2D.magnitude);
-        _controller.CarRigidbody.rotation *= Quaternion.Euler(Vector3.up * wheelRotation * turnCapacity);
+        _controller.CarRigidbody.angularVelocity = (_torqueMultiplier * Vector3.up * wheelRotation * turnCapacity);
     }
 
     private void InterpolateWheelOrientation()
